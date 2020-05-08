@@ -58,29 +58,41 @@ def DFS(x, litera):
         if litera == 0:
             stack = ['z']
         #print(litera, i, stack)
-        if len(stack) > 0 and litera < len(word):
-            popped = stack.pop()
-            if (matrix[x][int(word[litera]) if word[litera] < 'a' else ord(word[litera])][i][int(popped) if popped < 'a' else ord(popped)] != '`') or matrix[x][ord('e')][i][int(popped) if popped < 'a' else ord(popped)] != '`':
-                temp = ""
-                #print(stack, end=' ')
+        if poz in final and len(stack) == 1 and litera == len(word):
+            ok = True
+            return 0
+        if len(stack) > 0:
+            if litera < len(word):
+                popped = stack.pop()
                 if matrix[x][int(word[litera]) if word[litera] < 'a' else ord(word[litera])][i][int(popped) if popped < 'a' else ord(popped)] != '`':
+                    temp = ""
+                    #print(stack, end=' ')
                     for j in matrix[x][int(word[litera]) if word[litera] < 'a' else ord(word[litera])][i][int(popped) if popped < 'a' else ord(popped)]:
                         temp = j + temp
+                    for y in temp:
+                        if y != 'e':
+                            stack.append(y)
+                    poz = i
+                    #print(temp, litera, poz, stack)
+                    DFS(i, litera+1)
                 else:
+                    stack.append(popped)
+            else:
+                popped = stack.pop()
+                if matrix[x][ord('e')][i][int(popped) if popped < 'a' else ord(popped)] != '`':
+                    temp = ""
+                    #print(stack, end=' ')
                     for j in matrix[x][ord('e')][i][int(popped) if popped < 'a' else ord(popped)]:
                         temp = j + temp
-                for y in temp:
-                    if y != 'e':
-                        stack.append(y)
-                poz = i
-                #print(temp, word[litera], poz, stack)
-                DFS(i, litera+1)
-            else:
-                stack.append(popped)
-        else:
-            if poz in final and len(stack) == 1 and litera < len(word):
-                ok = True
-                return 0
+                    for y in temp:
+                        if y != 'e':
+                            stack.append(y)
+                    poz = i
+                    #print(temp, litera, poz, stack)
+                    #print("YEE")
+                    DFS(i, litera)
+                else:
+                    stack.append(popped)
 
 
 DFS(start, 0)
