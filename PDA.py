@@ -62,7 +62,7 @@ def DFS(x, litera):
             popped = stack.pop()
             if (matrix[x][int(word[litera]) if word[litera] < 'a' else ord(word[litera])][i][int(popped) if popped < 'a' else ord(popped)] != '`') or matrix[x][ord('e')][i][int(popped) if popped < 'a' else ord(popped)] != '`':
                 temp = ""
-                print(stack, end=' ')
+                #print(stack, end=' ')
                 if matrix[x][int(word[litera]) if word[litera] < 'a' else ord(word[litera])][i][int(popped) if popped < 'a' else ord(popped)] != '`':
                     for j in matrix[x][int(word[litera]) if word[litera] < 'a' else ord(word[litera])][i][int(popped) if popped < 'a' else ord(popped)]:
                         temp = j + temp
@@ -73,7 +73,7 @@ def DFS(x, litera):
                     if y != 'e':
                         stack.append(y)
                 poz = i
-                print(temp, word[litera], poz, stack)
+                #print(temp, word[litera], poz, stack)
                 DFS(i, litera+1)
             else:
                 stack.append(popped)
